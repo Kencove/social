@@ -69,4 +69,7 @@ class MailActivity(models.Model):
             and a.user_id
             and a.user_id not in a.team_id.member_ids
         ):
-            raise ValidationError(_("The assigned user is not member of the team."))
+            raise ValidationError(
+                _("The assigned user %s is not member of the team %s.")
+                % (self.user_id.name, self.team_id.name)
+            )
